@@ -20,6 +20,11 @@ function App() {
 			);
 		});
 	};
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+	};
+
 	return (
 		<div>
 			<header className="header">
@@ -27,6 +32,8 @@ function App() {
 			</header>
 			<main className="main">
 				<ul className="clubsList">{htmlClubsList()}</ul>
+
+				<form onSubmit={handleSubmit}></form>
 			</main>
 		</div>
 	);
