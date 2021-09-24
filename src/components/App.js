@@ -70,6 +70,7 @@ function App() {
 					<label htmlFor="name">
 						Nombre del club
 						<input
+							className="inputName"
 							type="text"
 							name="name"
 							id="name"
