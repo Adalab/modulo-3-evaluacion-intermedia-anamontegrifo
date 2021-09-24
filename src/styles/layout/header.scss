@@ -1,10 +1,13 @@
+body {
+	margin: 0 20px;;
+}
 .header {
 	display: flex;
+	width: 100vw;
 	height: 50px;
 	border-bottom: 1px solid grey;
-	padding: 0 20px;
+	font-size: 25px;
 	&__title {
-		font-size: 25px;
-		align-self:flex-end;
+				align-self:flex-end;
 	}
 }
