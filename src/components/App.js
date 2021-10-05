@@ -9,6 +9,8 @@ function App() {
 	const [newWeek, setNewWeek] = useState(false);
 	const [newWeekend, setNewWeekend] = useState(false);
 
+	const [scheduleFilter, setScheduleFilter] = useState('OpenAllDays');
+
 	const handleAddNewName = (event) => {
 		setNewName(event.currentTarget.value);
 	};
@@ -20,20 +22,45 @@ function App() {
 	const handleAddNewWeekend = (event) => {
 		setNewWeekend(event.currentTarget.checked);
 	};
-	const htmlClubsList = () => {
-		return clubsList.map((oneClub, index) => {
-			return (
-				<li key={index} className="clubsList__item">
-					<h2>{`#${index}: ${oneClub.name}`}</h2>
-					<p>{`Abierto entre semana: ${
-						oneClub.openOnWeekdays ? 'Sí' : 'No'
-					}`}</p>
-					<p>{`Abierto el fin de semana: ${
-						oneClub.openOnWeekend ? 'Sí' : 'No'
-					}`}</p>
-				</li>
-			);
-		});
+
+	const handleScheduleFilter = (event) => {
+		setScheduleFilter(event.currentTarget.value);
+	};
+
+	const handleDeleteClub = (event) => {
+		const selectItem = event.currentTarget.id;
+		clubsList.splice(selectItem, 1);
+		setClubsList([...clubsList]);
+	};
+
+	const htmlClubsList = (event) => {
+		return clubsList
+			.filter((oneClub) => {
+				if (scheduleFilter === 'openOnWeekDays') {
+					return oneClub.openOnWeekdays === true;
+				} else if (scheduleFilter === 'openOnWeekend') {
+					return oneClub.openOnWeekend === true;
+				}
+				return true;
+			})
+
+			.map((oneClub, index) => {
+				return (
+					<li key={index} id={index} className="clubsList__item">
+						<button className="clubsList__button" onClick={handleDeleteClub}>
+							<i className="fas fa-times-circle clubsList__icon"></i>
+						</button>
+
+						<h2>{`#${index}: ${oneClub.name}`}</h2>
+						<p>{`Abierto entre semana: ${
+							oneClub.openOnWeekdays ? 'Sí' : 'No'
+						}`}</p>
+						<p>{`Abierto el fin de semana: ${
+							oneClub.openOnWeekend ? 'Sí' : 'No'
+						}`}</p>
+					</li>
+				);
+			});
 	};
 
 	const handleClick = (event) => {
@@ -59,6 +86,17 @@ function App() {
 		<div>
 			<header className="header">
 				<h1 className="header__title">Mis clubs</h1>
+				<form action="" className="header__form">
+					<select
+						className="header__form--select"
+						value={scheduleFilter}
+						onChange={handleScheduleFilter}
+					>
+						<option value="openAllDays">Abierto todos los días</option>
+						<option value="openOnWeekDays">Abierto entre semana</option>
+						<option value="openOnWeekend">Abierto los fines de semana</option>
+					</select>
+				</form>
 			</header>
 			<main className="main">
 				<ul className="clubsList">{htmlClubsList()}</ul>

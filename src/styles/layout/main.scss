@@ -11,7 +11,16 @@
 		border: 1px solid grey;
 		border-radius: 10px;
 		padding: 10px;
-
+	}
+	&__button {
+		position: relative;
+		left:200px;
+		border: none;
+		background-color: transparent;
+	}
+	&__icon {
+		color:brown;
+		font-size: 20px;
 	}
 }
 
@@ -24,11 +33,8 @@
 		color: white;
 		background-color: rgb(115, 160, 26);
 		border: none;
-		border-radius: 5px;
-	}
-	
+	}	
 }
-
 .inputName {
 	margin-left: 5px;
 }

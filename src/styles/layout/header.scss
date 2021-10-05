@@ -4,11 +4,22 @@ body {
 }
 .header {
 	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	padding-bottom: 10px;
+	gap: 20px;
 	width: 100vw;
 	height: 50px;
 	border-bottom: 1px solid grey;
 	font-size: 25px;
 	&__title {
 				align-self:flex-end;
+	}
+	&__form {
+	&--select{
+		border: none;
+		color: white;
+		background-color: rgb(115, 160, 26);
+	}
 	}
 }
