@@ -1,10 +1,11 @@
 # Ejercicio React
 
 Este ejercicio consiste en crear un organizador personal de clubs. Está creado sobre el React Starter Kit de Adalab.
+Puedes añadir nuevos clubs con su fecha de apertura, borrarlos y volver a los valores iniciales.
 
 Esta es la apariencia de la web:
 
-![screenshot-01](./src/images/screenshot-01.png)
+![screenshot-01](./src/images/screenshot.png)
 
 ### Estructura del proyecto
 
