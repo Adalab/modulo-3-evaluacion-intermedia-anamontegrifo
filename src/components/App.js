@@ -1,15 +1,20 @@
 import '../styles/App.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import initialClubs from '../data/clubs.json';
+import ls from '../service/Ls';
 
 function App() {
-	const [clubsList, setClubsList] = useState(initialClubs);
+	const [clubsList, setClubsList] = useState(ls.get('clubsList', initialClubs));
 
 	const [newName, setNewName] = useState('');
 	const [newWeek, setNewWeek] = useState(false);
 	const [newWeekend, setNewWeekend] = useState(false);
 
 	const [scheduleFilter, setScheduleFilter] = useState('OpenAllDays');
+
+	useEffect(() => {
+		ls.set('clubsList', clubsList);
+	}, [clubsList]);
 
 	const handleAddNewName = (event) => {
 		setNewName(event.currentTarget.value);
@@ -28,9 +33,16 @@ function App() {
 	};
 
 	const handleDeleteClub = (event) => {
-		const selectItem = event.currentTarget.id;
-		clubsList.splice(selectItem, 1);
+		const selectItem = event.target.id;
+		const deletedItem = clubsList.findIndex((club) => {
+			return selectItem === club.id;
+		});
+		clubsList.splice(deletedItem, 1);
 		setClubsList([...clubsList]);
+	};
+
+	const handleResetClubs = () => {
+		setClubsList(initialClubs);
 	};
 
 	const htmlClubsList = (event) => {
@@ -46,12 +58,12 @@ function App() {
 
 			.map((oneClub, index) => {
 				return (
-					<li key={index} id={index} className="clubsList__item">
+					<li key={index} id={index + 1} className="clubsList__item">
 						<button className="clubsList__button" onClick={handleDeleteClub}>
 							<i className="fas fa-times-circle clubsList__icon"></i>
 						</button>
 
-						<h2>{`#${index}: ${oneClub.name}`}</h2>
+						<h2>{`#${index + 1}: ${oneClub.name}`}</h2>
 						<p>{`Abierto entre semana: ${
 							oneClub.openOnWeekdays ? 'Sí' : 'No'
 						}`}</p>
@@ -97,14 +109,18 @@ function App() {
 						<option value="openOnWeekend">Abierto los fines de semana</option>
 					</select>
 				</form>
+				<button className="resetBtn" onClick={handleResetClubs}>
+					Valores iniciales
+				</button>
 			</header>
 			<main className="main">
-				<ul className="clubsList">{htmlClubsList()}</ul>
+				<section className="container">
+					<ul className="clubsList">{htmlClubsList()}</ul>
+				</section>
 
 				<form className="form" onSubmit={handleSubmit}>
-					<header className="header">
-						<h2 className="header__title">Añadir un nuevo club</h2>
-					</header>
+					<h2 className="form__title">Añadir un nuevo club</h2>
+
 					<label htmlFor="name">
 						Nombre del club
 						<input

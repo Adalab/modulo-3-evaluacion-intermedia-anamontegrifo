@@ -12,7 +12,7 @@
 	{
 	"name": "Escape room club",
 	"openOnWeekdays": false,
-	"openOnWeekend": false
+	"openOnWeekend": true
 	},
 	{
 	"name": "Debate club",
