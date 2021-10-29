@@ -58,7 +58,7 @@ function App() {
 
 			.map((oneClub, index) => {
 				return (
-					<li key={index} id={index + 1} className="clubsList__item">
+					<li key={index} id={index} className="clubsList__item">
 						<button className="clubsList__button" onClick={handleDeleteClub}>
 							<i className="fas fa-times-circle clubsList__icon"></i>
 						</button>
