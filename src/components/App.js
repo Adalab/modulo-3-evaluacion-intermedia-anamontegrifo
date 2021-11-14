@@ -42,7 +42,7 @@ function App() {
 	};
 
 	const handleResetClubs = () => {
-		setClubsList(initialClubs);
+		setClubsList([...initialClubs]);
 	};
 
 	const htmlClubsList = (event) => {
